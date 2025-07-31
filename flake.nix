@@ -23,7 +23,7 @@
 
       modules = [
         ./hosts/${hostname}/configuration.nix
-	./modules/default.nix
+	./modules/
       ];
     };
 

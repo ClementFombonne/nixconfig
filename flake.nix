@@ -6,13 +6,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: let
+  outputs = { self, nixpkgs, ... }@inputs:
+  let
     system = "x86_64-linux";
     user = "clement";
+    lib = nixpkgs.lib;
 
     # Hosts definition (with nixos-unstable)
     hosts = [
-      { hostname = "orion"; stateVersion = "unstable"; }
+      { hostname = "orion"; stateVersion = "unstable"; bundles.hyprland = true; }
     ];
 
     makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
@@ -23,16 +25,16 @@
 
       modules = [
         ./hosts/${hostname}/configuration.nix
-	./modules
-      ];
+	./modules/default.nix
+      ]
+      ++ lib.optional bundles.hyprland .modules/hyprland/bundle.nix;
     };
-
   in {
     # Define NixOS configurations for each host
     nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
       configs // {
         "${host.hostname}" = makeSystem {
-          inherit (host) hostname stateVersion;
+          inherit (host) hostname stateVersion bundles;
         };
       }) {} hosts;
   };

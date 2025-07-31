@@ -17,10 +17,10 @@
       { hostname = "orion"; stateVersion = "unstable"; bundles.hyprland = true; }
     ];
 
-    makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
+    makeSystem = { hostname, stateVersion, bundles }: nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {
-        inherit inputs stateVersion hostname user;
+        inherit inputs stateVersion hostname user bundles;
       };
 
       modules = [

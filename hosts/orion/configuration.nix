@@ -89,13 +89,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    tree
     neovim 
-    git
     ghostty
     waybar
   ];
-
-  system.stateVersion = "25.05"; # Did you read the comment?
 
 }

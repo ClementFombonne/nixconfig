@@ -3,12 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -16,6 +16,8 @@
 
   networking.hostName = "orion"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "i915" ];
 

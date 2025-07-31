@@ -1,11 +1,39 @@
 {
-  description = "A very basic flake";
+  description = "Multi-Host NixOS configuration";
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # Using the unstable channel for nixpkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { self, nixpkgs }: {
-    nixosConfigurations.orion = nixpkgs.lib.nixosSystem {
-      modules = [ ./configuration.nix ];
+
+  outputs = { self, nixpkgs, ... }@inputs: let
+    system = "x86_64-linux";
+    user = "clement";
+
+    # Hosts definition (with nixos-unstable)
+    hosts = [
+      { hostname = "orion"; stateVersion = "unstable"; }
+    ];
+
+    makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
+      system = system;
+      specialArgs = {
+        inherit inputs stateVersion hostname user;
+      };
+
+      modules = [
+        ./hosts/${hostname}/configuration.nix
+      ];
     };
+
+  in {
+    # Define NixOS configurations for each host
+    nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
+      configs // {
+        "${host.hostname}" = makeSystem {
+          inherit (host) hostname stateVersion;
+        };
+      }) {} hosts;
   };
 }
+

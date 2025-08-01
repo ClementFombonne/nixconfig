@@ -7,6 +7,7 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager,... }@inputs:
@@ -68,13 +69,13 @@
         "${host.hostname}" = makeSystem {
           inherit (host) hostname stateVersion bundles;
         };
-    }) {} hosts;
+      }) {} hosts;
     homeConfigurations = nixpkgs.lib.foldl' (configs: host:
       configs // {
         "${user}" = makeHome {
           inherit (host) hostname stateVersion bundles;
         };
-    }) {} hosts;
+      }) {} hosts;
   };
 }
 

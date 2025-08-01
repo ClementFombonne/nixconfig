@@ -28,12 +28,12 @@
         inherit inputs stateVersion hostname user bundles;
       };
 
-      modules = [
+      modules = lib.flatten [
         ./hosts/${hostname}/configuration.nix
 	./modules/default.nix
-      ]
-      ++ lib.optional bundles.hyprland ./modules/hyprland/bundle.nix
-      ++ lib.optional bundles.terminal ./modules/terminal/bundle.nix;
+        (lib.optional bundles.hyprland ./modules/hyprland/bundle.nix)
+        (lib.optional bundles.terminal ./modules/terminal/bundle.nix)
+      ];
     };
   in {
     # Define NixOS configurations for each host

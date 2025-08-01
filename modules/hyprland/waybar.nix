@@ -5,6 +5,6 @@
       lib.mkEnableOption "enables waybar";
   };
   config = lib.mkIf config.modules.waybar.enable {
-    programs.waybar.enbale = true;
+    programs.waybar.enable = true;
   };
 }

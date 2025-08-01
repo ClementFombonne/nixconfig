@@ -52,7 +52,7 @@
       modules = lib.flatten [
         ./hosts/${hostname}/home.nix
         ./home-manager/default.nix
-        # (lib.optional bundles.hyprland ./modules/hyprland/bundle.nix)
+        (lib.optional bundles.hyprland ./home-manager/hyprland/bundle.nix)
         # (lib.optional bundles.app ./modules/app/bundle.nix)
         # (lib.optional bundles.dev ./modules/dev/bundle.nix)
         # (lib.optional bundles.terminal ./modules/terminal/bundle.nix)

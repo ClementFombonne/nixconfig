@@ -14,7 +14,12 @@
 
     # Hosts definition (with nixos-unstable)
     hosts = [
-      { hostname = "orion"; stateVersion = "unstable"; bundles.hyprland = true; }
+      { 
+      hostname = "orion"; stateVersion = "unstable"; bundles = { 
+        hyprland = true;
+	terminal = true;
+        }
+      }
     ];
 
     makeSystem = { hostname, stateVersion, bundles }: nixpkgs.lib.nixosSystem {
@@ -28,6 +33,7 @@
 	./modules/default.nix
       ]
       ++ lib.optional bundles.hyprland ./modules/hyprland/bundle.nix;
+      ++ lib.optional bundles.terminal ./modules/terminal/bundle.nix;
     };
   in {
     # Define NixOS configurations for each host

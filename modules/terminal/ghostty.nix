@@ -7,7 +7,9 @@
   config = lib.mkIf config.modules.ghostty.enable {
     environment.systemPackages = with pkgs; [ 
       ghostty 
-      nerd-fonts.fira-code 
+    ];
+    fonts.packages = with pkgs; [
+      nerd-fonts.fira-code
     ];
   };
 }

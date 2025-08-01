@@ -17,6 +17,8 @@
       { 
       hostname = "orion"; stateVersion = "unstable"; bundles = { 
         hyprland = true;
+	app = true;
+	dev = true;
 	terminal = true;
         };
       }
@@ -32,6 +34,8 @@
         ./hosts/${hostname}/configuration.nix
 	./modules/default.nix
         (lib.optional bundles.hyprland ./modules/hyprland/bundle.nix)
+        (lib.optional bundles.app ./modules/app/bundle.nix)
+        (lib.optional bundles.dev ./modules/dev/bundle.nix)
         (lib.optional bundles.terminal ./modules/terminal/bundle.nix)
       ];
     };

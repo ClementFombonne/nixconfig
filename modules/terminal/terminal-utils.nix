@@ -6,9 +6,11 @@
   };
   config = lib.mkIf config.modules.terminal-utils.enable {
     environment.systemPackages = with pkgs; [ 
+      bat
       btop 
       tmux
       fastfetch
+      lazygit
     ];
   };
 }

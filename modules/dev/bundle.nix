@@ -1,8 +1,9 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./nautilus.nix
+    ./python.nix
   ];
-  modules.nautilus.enable =
+
+  modules.python.enable =
     lib.mkDefault true;
 }

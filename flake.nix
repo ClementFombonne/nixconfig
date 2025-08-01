@@ -56,6 +56,10 @@
         # (lib.optional bundles.dev ./modules/dev/bundle.nix)
         # (lib.optional bundles.terminal ./modules/terminal/bundle.nix)
       ];
+      home = {
+        username = user;
+	homeDirectory = "/home/${user}";
+      };
     };
   in {
     # Define NixOS configurations for each host

@@ -18,7 +18,7 @@
       hostname = "orion"; stateVersion = "unstable"; bundles = { 
         hyprland = true;
 	terminal = true;
-        }
+        };
       }
     ];
 

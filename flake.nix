@@ -44,7 +44,7 @@
 	home-manager.nixosModules.home-manager
         {
 	  home-manager.useGlobalPkgs = true;
-          home-manager.specialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs = {inherit user;};
 	  home-manager.users.${user} = import ./hosts/${hostname}/home.nix;
         }
       ];

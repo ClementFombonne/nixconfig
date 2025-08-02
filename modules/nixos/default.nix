@@ -10,4 +10,5 @@
       vim git zsh tree curl
     ];
   };
+  programs.vim.defaultEditor = true;
 }

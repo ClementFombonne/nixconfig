@@ -33,7 +33,6 @@
       specialArgs = {
         inherit inputs hostname stateVersion user bundles;
       };
-
       modules = lib.flatten [
         ./hosts/${hostname}/configuration.nix
 	./modules/nixos/default.nix

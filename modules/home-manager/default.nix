@@ -10,6 +10,7 @@
       push.autoSetupRemote = true; 
     };
   };
+
   programs.vim = {
     enable = true; 
     extraConfig = ''
@@ -20,5 +21,23 @@
       set expandtab       " Use spaces instead of tabs
       syntax on           " Enable syntax highlighting
     '';
+  };
+
+  programs.zsh = {
+    enable = true;  # Enable Zsh
+    autosuggestion.enable = true;
+    shellAliases = {
+      ll = "ls -lha";
+      ".." = "cd ..";
+    };
+    oh-my-zsh = {
+      enable = true;  # Enable Oh My Zsh for additional features
+      theme = "agnoster";  # Set the theme (you can choose others)
+      plugins = [
+        "git"
+	"sudo"
+	"copyfile"
+      ];
+    };
   };
 }

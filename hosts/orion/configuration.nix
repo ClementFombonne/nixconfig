@@ -68,6 +68,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.clement = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "clement";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];

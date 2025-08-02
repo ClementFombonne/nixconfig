@@ -7,8 +7,8 @@
 
   config = {
     environment.systemPackages = with pkgs; [
-      vim git zsh tree curl
+      vim git tree curl
     ];
+    programs.zsh.enable = true;
   };
-  programs.vim.defaultEditor = true;
 }
